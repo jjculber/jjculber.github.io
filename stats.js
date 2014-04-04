@@ -51,7 +51,7 @@ function buildChart(data) {
                .attr("class", "xrule").attr("x", x).attr("y", height-margin)
                .attr("dy", 20).attr("text-anchor", "middle").text(function(d) {
                   var date = new Date(d);
-                  return (date.getMonth()+1)+"/"+date.getDate() + " " + date.getHours();
+                  return (date.getMonth()+1)+"/"+date.getDate() + " " + date.getHours() + ":00";
                });
 
    chart.selectAll("text.yrule").data(yr.ticks(10)).enter().append("svg:text")
