@@ -56,13 +56,13 @@ function buildChart(data) {
 
    chart.selectAll("text.yrule").data(yr.ticks(10)).enter().append("svg:text")
                .attr("class", "yruler").attr("x", width-margin).attr("y", yr)
-               .attr("dy", 0).attr("dx", 30).attr("text-anchor", "left")
+               .attr("dy", 0).attr("dx", 0).attr("text-anchor", "left")
                .text(function(num) {
                   return num/1000000 + " MH/s";
                });
    chart.selectAll("text.yrule").data(yl.ticks(10)).enter().append("svg:text")
                .attr("class", "yrulel").attr("x", 0).attr("y", yl)
-               .attr("dy", 0).attr("dx", 0).attr("text-anchor", "left")
+               .attr("dy", 0).attr("dx", 30).attr("text-anchor", "left")
                .text(function(num) {
                   return num.toFixed(2);
                });
