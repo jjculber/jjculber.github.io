@@ -20,9 +20,9 @@ function buildChart(data) {
    
    // y axis
    var y = d3.scale.linear().domain([d3.min(data.map(function(x) {
-      return min(x.sell, x.buy);
+      return x.hash;
    })), d3.max(data.map(function(x) {
-      return max(x.sell, x.buy);
+      return x.hash;
    }))]).range([height-margin, margin]);
    
    // x axis
@@ -81,7 +81,7 @@ function buildChart(data) {
    });
 
    chart.append("svg:path").attr("d", line1(data)).attr("class", "data1");
-   chart.append("svg:path").attr("d", line2(data)).attr("class", "data2");
+   //chart.append("svg:path").attr("d", line2(data)).attr("class", "data2");
 
 }
 
