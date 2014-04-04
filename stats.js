@@ -26,9 +26,9 @@ function buildChart(data) {
    }))]).range([height-margin, margin]);
    // y axis
    var yr = d3.scale.linear().domain([d3.min(data.map(function(x) {
-      return x.hash;
+      return min(x.hash, (x.hash * 150 / Math.pow(2,32)));
    })), d3.max(data.map(function(x) {
-      return x.hash;
+      return min(x.hash, (x.hash * 150 / Math.pow(2,32)));
    }))]).range([height-margin, margin]);
    
    // x axis
@@ -60,11 +60,11 @@ function buildChart(data) {
                .text(function(num) {
                   return num/1000000 + " MH/s";
                });
-   chart.selectAll("text.yrule").data(yr.ticks(10)).enter().append("svg:text")
-               .attr("class", "yrulel").attr("x", 0-margin).attr("y", yr)
-               .attr("dy", 0).attr("dx", 20).attr("text-anchor", "middle")
+   chart.selectAll("text.yrule").data(yl.ticks(10)).enter().append("svg:text")
+               .attr("class", "yrulel").attr("x", 0-margin).attr("y", yl)
+               .attr("dy", 0).attr("dx", 0).attr("text-anchor", "right")
                .text(function(num) {
-                  return num.toFixed(4);
+                  return num.toFixed(2);
                });
 
    var line1 = d3.svg.line()
