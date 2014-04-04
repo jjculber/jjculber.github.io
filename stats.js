@@ -44,7 +44,7 @@ function buildChart(data) {
    chart.selectAll("text.xrule").data(x.ticks(10)).enter().append("svg:text")
                .attr("class", "xrule").attr("x", x).attr("y", height-margin)
                .attr("dy", 20).attr("text-anchor", "middle").text(function(d) {
-                  var date = new Date(d*1000);
+                  var date = new Date(d);
                   return (date.getMonth()+1)+"/"+date.getDate() + " " + date.getHours();
                });
 
@@ -52,7 +52,7 @@ function buildChart(data) {
                .attr("class", "yrule").attr("x", width-margin).attr("y", y)
                .attr("dy", 0).attr("dx", 20).attr("text-anchor", "middle")
                .text(function(num) {
-                  return (num/100).toFixed(0);
+                  return num;
                });
 
    var line1 = d3.svg.line()
@@ -87,7 +87,7 @@ function buildChart(data) {
 
 function appendToData(data) {
    for (var i = 0; i<data.length; i++) {
-      chartdata.push({timestamp: Date.parse(data[i][0])/1000, hash: data[i][1], diff: data[i][2]});
+      chartdata.push({timestamp: Date.parse(data[i][0]), hash: data[i][1], diff: data[i][2]});
    }
    chartdata = chartdata.sort(function(x, y) {
       return x.timestamp-y.timestamp;
