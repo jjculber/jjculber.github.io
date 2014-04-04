@@ -20,9 +20,9 @@ function buildChart(data) {
    
    // y axis
    var yl = d3.scale.linear().domain([d3.min(data.map(function(x) {
-      return x.hash * 150 / Math.pow(2, 32);
+      return min(x.hash * 150 / Math.pow(2, 32), x.diff);
    })), d3.max(data.map(function(x) {
-      return x.hash * 150 / Math.pow(2, 32);
+      return max(x.hash * 150 / Math.pow(2, 32), x.diff);
    }))]).range([height-margin, margin]);
    // y axis
    var yr = d3.scale.linear().domain([d3.min(data.map(function(x) {
