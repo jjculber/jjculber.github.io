@@ -61,8 +61,8 @@ function buildChart(data) {
                   return num/1000000 + " MH/s";
                });
    chart.selectAll("text.yrule").data(yl.ticks(10)).enter().append("svg:text")
-               .attr("class", "yrulel").attr("x", 0-margin).attr("y", yl)
-               .attr("dy", 0).attr("dx", 0).attr("text-anchor", "right")
+               .attr("class", "yrulel").attr("x", 0).attr("y", yl)
+               .attr("dy", 0).attr("dx", 0).attr("text-anchor", "left")
                .text(function(num) {
                   return num.toFixed(2);
                });
