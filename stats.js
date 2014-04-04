@@ -13,7 +13,8 @@ function max(a, b) {
 
 function buildChart(data) {
 
-   var margin = 70;
+   var xmargin = 70;
+   var ymargin = 20;
 
    var chart = d3.select("#chart").append("svg:svg").attr("class", "chart")
                .attr("width", width).attr("height", height);
@@ -23,40 +24,40 @@ function buildChart(data) {
       return min(x.hash * 150 / Math.pow(2, 32), x.diff);
    })), d3.max(data.map(function(x) {
       return max(x.hash * 150 / Math.pow(2, 32), x.diff);
-   }))]).range([height-margin, margin]);
+   }))]).range([height-ymargin, ymargin]);
    // y axis
    var yr = d3.scale.linear().domain([d3.min(data.map(function(x) {
       return min(x.hash, (x.diff / 150 * Math.pow(2,32)));
    })), d3.max(data.map(function(x) {
       return max(x.hash, (x.diff / 150 * Math.pow(2,32)));
-   }))]).range([height-margin, margin]);
+   }))]).range([height-ymargin, ymargin]);
    
    // x axis
    var x = d3.scale.linear().domain([d3.min(data.map(function(d) {
       return d.timestamp;
    })), d3.max(data.map(function(d) {
       return d.timestamp;
-   }))]).range([margin, width-margin]);
+   }))]).range([xmargin, width-xmargin]);
 
    // axis lines
    chart.selectAll("line.x").data(x.ticks(10)).enter().append("svg:line").attr(
-               "class", "x").attr("x1", x).attr("x2", x).attr("y1", margin)
-               .attr("y2", height-margin).attr("stroke", "#ccc");
+               "class", "x").attr("x1", x).attr("x2", x).attr("y1", ymargin)
+               .attr("y2", height-ymargin).attr("stroke", "#ccc");
 
    chart.selectAll("line.y").data(yr.ticks(10)).enter().append("svg:line").attr(
-               "class", "y").attr("x1", margin).attr("x2", width-margin).attr(
+               "class", "y").attr("x1", xmargin).attr("x2", width-xmargin).attr(
                "y1", yr).attr("y2", yr).attr("stroke", "#ccc");
 
    chart.selectAll("text.xrule").data(x.ticks(10)).enter().append("svg:text")
-               .attr("class", "xrule").attr("x", x).attr("y", height-margin)
+               .attr("class", "xrule").attr("x", x).attr("y", height-ymargin)
                .attr("dy", 20).attr("text-anchor", "middle").text(function(d) {
                   var date = new Date(d);
                   return (date.getMonth()+1)+"/"+date.getDate();
                });
 
    chart.selectAll("text.yrule").data(yr.ticks(10)).enter().append("svg:text")
-               .attr("class", "yruler").attr("x", width-margin).attr("y", yr)
-               .attr("dy", 0).attr("dx", 0).attr("text-anchor", "left")
+               .attr("class", "yruler").attr("x", width-xmargin).attr("y", yr)
+               .attr("dy", 0).attr("dx", 5).attr("text-anchor", "left")
                .text(function(num) {
                   return num/1000000 + " MH/s";
                });
