@@ -19,7 +19,13 @@ function buildChart(data) {
                .attr("width", width).attr("height", height);
    
    // y axis
-   var y = d3.scale.linear().domain([d3.min(data.map(function(x) {
+   var yl = d3.scale.linear().domain([d3.min(data.map(function(x) {
+      return x.diff;
+   })), d3.max(data.map(function(x) {
+      return x.diff;
+   }))]).range([height-margin, margin]);
+   // y axis
+   var yr = d3.scale.linear().domain([d3.min(data.map(function(x) {
       return x.hash;
    })), d3.max(data.map(function(x) {
       return x.hash;
@@ -37,9 +43,9 @@ function buildChart(data) {
                "class", "x").attr("x1", x).attr("x2", x).attr("y1", margin)
                .attr("y2", height-margin).attr("stroke", "#ccc");
 
-   chart.selectAll("line.y").data(y.ticks(10)).enter().append("svg:line").attr(
+   chart.selectAll("line.y").data(yr.ticks(10)).enter().append("svg:line").attr(
                "class", "y").attr("x1", margin).attr("x2", width-margin).attr(
-               "y1", y).attr("y2", y).attr("stroke", "#ccc");
+               "y1", yr).attr("y2", yr).attr("stroke", "#ccc");
 
    chart.selectAll("text.xrule").data(x.ticks(10)).enter().append("svg:text")
                .attr("class", "xrule").attr("x", x).attr("y", height-margin)
@@ -48,24 +54,22 @@ function buildChart(data) {
                   return (date.getMonth()+1)+"/"+date.getDate() + " " + date.getHours();
                });
 
-   chart.selectAll("text.yrule").data(y.ticks(10)).enter().append("svg:text")
-               .attr("class", "yrule").attr("x", width-margin).attr("y", y)
+   chart.selectAll("text.yrule").data(yr.ticks(10)).enter().append("svg:text")
+               .attr("class", "yrule").attr("x", width-margin).attr("y", yr)
                .attr("dy", 0).attr("dx", 20).attr("text-anchor", "middle")
                .text(function(num) {
-                  return num;
+                  return num/1000000 + " MH/s";
                });
 
    var line1 = d3.svg.line()
    // assign the X function to plot our line as we wish
    .x(function(d,i) { 
       // return the X coordinate where we want to plot this datapoint
-//      console.log("buy price: " + d.timestamp + ", " + x(d.timestamp));
       return x(d.timestamp);
    })
    .y(function(d) { 
       // return the Y coordinate where we want to plot this datapoint
-//      console.log("buy price: " + d.buy + ", " + y(d.buy));
-      return y(d.hash); // use the 1st index of data (for example, get 20 from [20,13])
+      return yr(d.hash); // use the 1st index of data (for example, get 20 from [20,13])
    });
 
    
@@ -77,11 +81,11 @@ function buildChart(data) {
    })
    .y(function(d) { 
       // return the Y coordinate where we want to plot this datapoint
-      return y(d.diff); // use the 2nd index of data (for example, get 13 from [20,13])
+      return yl(d.diff); // use the 2nd index of data (for example, get 13 from [20,13])
    });
 
    chart.append("svg:path").attr("d", line1(data)).attr("class", "data1");
-   //chart.append("svg:path").attr("d", line2(data)).attr("class", "data2");
+   chart.append("svg:path").attr("d", line2(data)).attr("class", "data2");
 
 }
 
