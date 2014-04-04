@@ -55,10 +55,16 @@ function buildChart(data) {
                });
 
    chart.selectAll("text.yrule").data(yr.ticks(10)).enter().append("svg:text")
-               .attr("class", "yrule").attr("x", width-margin).attr("y", yr)
+               .attr("class", "yruler").attr("x", width-margin).attr("y", yr)
                .attr("dy", 0).attr("dx", 20).attr("text-anchor", "middle")
                .text(function(num) {
                   return num/1000000 + " MH/s";
+               });
+   chart.selectAll("text.yrule").data(yr.ticks(10)).enter().append("svg:text")
+               .attr("class", "yrulel").attr("x", 0-margin).attr("y", yr)
+               .attr("dy", 0).attr("dx", 20).attr("text-anchor", "middle")
+               .text(function(num) {
+                  return num.toFixed(4);
                });
 
    var line1 = d3.svg.line()
