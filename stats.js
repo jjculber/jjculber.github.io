@@ -13,7 +13,7 @@ function max(a, b) {
 
 function buildChart(data) {
 
-   var margin = 50;
+   var margin = 70;
 
    var chart = d3.select("#chart").append("svg:svg").attr("class", "chart")
                .attr("width", width).attr("height", height);
@@ -56,7 +56,7 @@ function buildChart(data) {
 
    chart.selectAll("text.yrule").data(yr.ticks(10)).enter().append("svg:text")
                .attr("class", "yruler").attr("x", width-margin).attr("y", yr)
-               .attr("dy", 0).attr("dx", 20).attr("text-anchor", "middle")
+               .attr("dy", 0).attr("dx", 0).attr("text-anchor", "left")
                .text(function(num) {
                   return num/1000000 + " MH/s";
                });
