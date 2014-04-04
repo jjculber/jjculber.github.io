@@ -51,12 +51,12 @@ function buildChart(data) {
                .attr("class", "xrule").attr("x", x).attr("y", height-margin)
                .attr("dy", 20).attr("text-anchor", "middle").text(function(d) {
                   var date = new Date(d);
-                  return (date.getMonth()+1)+"/"+date.getDate() + " " + date.getHours() + ":00";
+                  return (date.getMonth()+1)+"/"+date.getDate();
                });
 
    chart.selectAll("text.yrule").data(yr.ticks(10)).enter().append("svg:text")
                .attr("class", "yruler").attr("x", width-margin).attr("y", yr)
-               .attr("dy", 0).attr("dx", 0).attr("text-anchor", "left")
+               .attr("dy", 0).attr("dx", 30).attr("text-anchor", "left")
                .text(function(num) {
                   return num/1000000 + " MH/s";
                });
