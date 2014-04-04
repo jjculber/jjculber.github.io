@@ -28,7 +28,7 @@ function buildChart(data) {
    var yr = d3.scale.linear().domain([d3.min(data.map(function(x) {
       return min(x.hash, (x.hash * 150 / Math.pow(2,32)));
    })), d3.max(data.map(function(x) {
-      return min(x.hash, (x.hash * 150 / Math.pow(2,32)));
+      return max(x.hash, (x.hash * 150 / Math.pow(2,32)));
    }))]).range([height-margin, margin]);
    
    // x axis
