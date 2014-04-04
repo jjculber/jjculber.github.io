@@ -64,7 +64,7 @@ function buildChart(data) {
                .attr("class", "yrulel").attr("x", 0).attr("y", yl)
                .attr("dy", 0).attr("dx", 0).attr("text-anchor", "left")
                .text(function(num) {
-                  return num.toFixed(3);
+                  return num.toFixed(2);
                });
 
    var line1 = d3.svg.line()
