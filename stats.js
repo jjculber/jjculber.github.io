@@ -87,7 +87,7 @@ function buildChart(data) {
 
 function appendToData(data) {
    for (var i = 0; i<data.length; i++) {
-      chartdata.push({timestamp: Date.parse(data[i][0]), hash: data[i][1], diff: data[i][2]});
+      chartdata.push({timestamp: Date.parse(data[i][0]), hash: parseInt(data[i][1]), diff: parseFloat(data[i][2]}));
    }
    chartdata = chartdata.sort(function(x, y) {
       return x.timestamp-y.timestamp;
