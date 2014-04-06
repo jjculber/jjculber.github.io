@@ -103,6 +103,7 @@ function appendToData(data) {
    chartdata = chartdata.sort(function(x, y) {
       return x.timestamp-y.timestamp;
    });
+   $('#difficulty').val(chartdata[chartdata.length-1].diff);
    buildChart(chartdata);
 }
 
@@ -112,4 +113,9 @@ function fetchData() {
 
 $(function() {
    fetchData();
+   
+   $('.calc').change(function() {
+      $('#profit').text((86400/($('#difficulty').val() * 4294967296 / ($('#hashrate').val() * 1000)) * 50) + ' DFC/day');
+   });
+
 });
