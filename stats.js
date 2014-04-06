@@ -104,6 +104,7 @@ function appendToData(data) {
       return x.timestamp-y.timestamp;
    });
    $('#difficulty').attr('value', chartdata[chartdata.length-1].diff);
+   calcProfit();
    buildChart(chartdata);
 }
 
@@ -111,9 +112,13 @@ function fetchData() {
    $.get("stats.json", appendToData);
 }
 
+function calcProfit() {
+   $('#profit').text((86400/($('#difficulty').val() * 4294967296 / ($('#hashrate').val() * 1000)) * 50) + ' DFC/day');
+}
+
 $(function() {
    $('.calc').change(function() {
-      $('#profit').text((86400/($('#difficulty').val() * 4294967296 / ($('#hashrate').val() * 1000)) * 50) + ' DFC/day');
+      calcProfit();
    });
    
    fetchData();
