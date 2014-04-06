@@ -17,12 +17,12 @@
 <div>
   Profit calculator:<br/>
   Difficulty <input id="difficulty" class="calc"></input>
-  Hash rate (kH/s) <input id="hashrate" class="calc"></input>
+  Hash rate (kH/s) <input id="hashrate" class="calc">350</input>
   DFC/day = <span id="profit"></span>
 </div>
 <script>
   $('.calc').change(function() {
-    
+    $('#profit').text((86400/($('#difficulty').val() * 4294967296 / ($('#hashrate').val() * 1000)) * 50) + ' DFC/day');
   });
 </script>
 <style>
