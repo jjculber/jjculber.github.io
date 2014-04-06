@@ -103,7 +103,7 @@ function appendToData(data) {
    chartdata = chartdata.sort(function(x, y) {
       return x.timestamp-y.timestamp;
    });
-   $('#difficulty').val(chartdata[chartdata.length-1].diff);
+   $('#difficulty').attr('value', chartdata[chartdata.length-1].diff);
    buildChart(chartdata);
 }
 
