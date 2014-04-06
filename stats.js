@@ -112,10 +112,9 @@ function fetchData() {
 }
 
 $(function() {
-   fetchData();
-   
    $('.calc').change(function() {
       $('#profit').text((86400/($('#difficulty').val() * 4294967296 / ($('#hashrate').val() * 1000)) * 50) + ' DFC/day');
    });
-
+   
+   fetchData();
 });
