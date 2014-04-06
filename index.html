@@ -20,11 +20,6 @@
   Hash rate (kH/s) <input id="hashrate" class="calc" value="350"></input><br/>
   DFC/day = <span id="profit"></span>
 </div>
-<script>
-  $('.calc').change(function() {
-    $('#profit').text((86400/($('#difficulty').val() * 4294967296 / ($('#hashrate').val() * 1000)) * 50) + ' DFC/day');
-  });
-</script>
 <style>
 path {
   stroke-width: 1;
